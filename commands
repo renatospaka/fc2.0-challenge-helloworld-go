@@ -1,9 +1,10 @@
 docker run -it --name go-in-docker golang:1.15
+docker run -it --name go-in-docker_alpine golang:1.15-alpine3.12
 
 docker run --rm -it --name go-in-docker -v $(pwd)/:/go/src/app -p 4500:4500 golang:1.15 bash
 
 docker build -t renatospaka/desafio-go-1:latest .
-docker build -t renatospaka/desafio-go-1:latest . -f Dockerfile.prod
+docker build -t renatospaka/desafio-go-1:prod . -f Dockerfile.prod
 
 docker push renatospaka/desafio-go-1:latest
 docker run -d --name desafio_go_1 -p 4500:4500 renatospaka/desafio-go-1:latest

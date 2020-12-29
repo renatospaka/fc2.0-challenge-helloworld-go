@@ -1,11 +1,9 @@
-FROM golang:1.15
-
+FROM golang:1.15-alpine3.12 AS build
 WORKDIR /usr/src/app
+COPY hello.go .
+RUN go build -o hello .
 
-COPY . .
-
-RUN apt-get update
-
-EXPOSE 4500
-
-CMD [ "node", "index.js" ]
+FROM scratch
+WORKDIR /usr/src/app
+COPY --from=build  /usr/src/app .
+CMD ["./hello"]
