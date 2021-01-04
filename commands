@@ -6,8 +6,11 @@ docker run --rm -it --name go-in-docker -v $(pwd)/:/go/src/app -p 4500:4500 gola
 ## docker build -t renatospaka/desafio-go-1:latest .
 ## docker build -t renatospaka/desafio-go-1:prod . -f Dockerfile.prod
 
-docker build -t renatospaka/codeeducation . -f Dockerfile.prod
+docker rm -f desafio-go-1
+docker rmi -f renatospaka/codeeducation:latest
+docker build -t renatospaka/codeeducation:latest . -f Dockerfile.prod
 docker run --name desafio-go-1 renatospaka/codeeducation
+docker start desafio-go-1
 docker push renatospaka/codeeducation
 
 ## docker run -it -rm --name desafio-go-1-d renatospaka/desafio-go-1:latest
